@@ -1,0 +1,7 @@
+node_modules
+.env
+.log
+server/public/bundle.js
+server/public/bundle.js.map
+tags
+.vscode
