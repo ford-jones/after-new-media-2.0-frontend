@@ -29,6 +29,13 @@ function GetVid () {
     return s
   }
 
+  /* ------------------------------------------------------------------ */
+
+  //  The following code needs to be rewritten
+
+  //  Call the MongoDB Api 
+  //  Use the id string to make a request to the youtube api
+
   function randomNum (max, min) {
     const num = Math.floor(Math.random() * (max - min) + min)
     return num
@@ -40,7 +47,6 @@ function GetVid () {
     const tagName = ['DSC ', 'MOV ', 'IMG ']
     const idxName = randomNum(2, 0)
     const searchTag = tagName[idxName] + tagNum
-    // console.log('searchTag: ', searchTag)
 
     getYoutubeResult(searchTag)
       .then((resultData) => {
@@ -61,6 +67,7 @@ function GetVid () {
       })
       .catch(err => console.error(err))
   }
+  /* ------------------------------------------------------------------*/
 
   const stringHeight = window.innerHeight.toString()
   const stringWidth = window.innerWidth.toString()

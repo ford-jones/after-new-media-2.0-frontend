@@ -1,3 +1,8 @@
+/* ------------------------------------------------------------------*/
+
+//  This prompts the server to hit a route that returns data and handles the response
+//  This (as well as superagent) shouldn't be needed if fetching from mongo cloud db
+
 import request from 'superagent'
 
 export function getYoutubeResult (tag) {
@@ -17,3 +22,4 @@ export function getStatistics (id) {
       return response.body
     })
 }
+/* ------------------------------------------------------------------*/
