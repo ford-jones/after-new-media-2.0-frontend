@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 
 import Backdrop from './Backdrop'
 import LoadAnim from './LoadAnim'
+import { getMongoData } from '../api'
 
 function Modal ({ handleClose, text, load }) {
   const dropIn = {
@@ -27,7 +28,16 @@ function Modal ({ handleClose, text, load }) {
     }
   }
 
-  return (
+  function handleClick(e) {
+    e.preventDefault()
+    console.log('button hit!')
+    getMongoData()
+  }
+
+
+  return ( 
+  <>
+  {/* <button className='button' type='submit' onClick={handleClick}>test</button>  */}
     <Backdrop onClick={handleClose}>
       {
         load
@@ -41,7 +51,8 @@ function Modal ({ handleClose, text, load }) {
           >
             <motion.h1
               className='h1-title'
-              onClick={handleClose}
+              // this should call handleClose
+              onClick={handleClick}
             >
               {text}
             </motion.h1>
@@ -57,6 +68,7 @@ function Modal ({ handleClose, text, load }) {
       }
 
     </Backdrop>
+  </>
   )
 }
 

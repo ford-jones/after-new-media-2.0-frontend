@@ -3,14 +3,13 @@ import YouTube from 'react-youtube'
 import Modal from './Modal'
 import { AnimatePresence } from 'framer-motion'
 import { useToggle } from '../context/toggleContext'
-import { getMongoData } from '../api'
 
 // import VideoPlayer from './VideoPlayer'
 
 function GetVid () {
-  // const [vidId, setVidId] = useState([])
+  const [vidId, setVidId] = useState([])
   const [toggle, setToggle] = useState(true)
-  // const [index, setIndex] = useState('')
+  const [index, setIndex] = useState('')
   // const [minView, setMinView] = useState('')
 
   const [player, setPlayer] = useState(null)
@@ -19,15 +18,15 @@ function GetVid () {
 
   const { playerToggle, setPlayerToggle } = useToggle()
 
-  useEffect(() => {
-    search()
-  }, [toggle])
+  // useEffect(() => {
+    // search()
+  // }, [toggle])
 
-  function pad (num, size) {
-    let s = num + ''
-    while (s.length < size) s = '0' + s
-    return s
-  }
+  // function pad (num, size) {
+  //   let s = num + ''
+  //   while (s.length < size) s = '0' + s
+  //   return s
+  // }
 
   /* ------------------------------------------------------------------ */
 

@@ -1,17 +1,21 @@
 const express = require('express')
-const router = express.router()
+const router = express.Router()
 const db = require('../video')
 
-router.get('/', (req, res) => {
-    db.getVideo()
-    .then((results) => {
-        console.log('route data: ', results)
-      res.json({ videos: results.map((vid) => vid) })
-      return null
-    })
-    .catch((err) => {
-      console.log(err)
-      res.status(500).json({ message: 'Somthing went wrong' })
+router.get('*', (req, res) => {
+  const operation = db.getVideo()
+  console.log('route data: ', operation)
+    
+      if (!operation) {
+        res.sendStatus(500)
+      }
     })
 
-})
+//})
+
+// router.delete('*', (req, res) => {
+//   const operation = db.deleteVideo()
+// })
+
+module.exports = router
+
