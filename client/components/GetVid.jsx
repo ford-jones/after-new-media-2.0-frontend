@@ -3,14 +3,14 @@ import YouTube from 'react-youtube'
 import Modal from './Modal'
 import { AnimatePresence } from 'framer-motion'
 import { useToggle } from '../context/toggleContext'
-import { getStatistics, getYoutubeResult } from '../api'
+import { getMongoData } from '../api'
 
 // import VideoPlayer from './VideoPlayer'
 
 function GetVid () {
-  const [vidId, setVidId] = useState([])
+  // const [vidId, setVidId] = useState([])
   const [toggle, setToggle] = useState(true)
-  const [index, setIndex] = useState('')
+  // const [index, setIndex] = useState('')
   // const [minView, setMinView] = useState('')
 
   const [player, setPlayer] = useState(null)
@@ -36,37 +36,37 @@ function GetVid () {
   //  Call the MongoDB Api 
   //  Use the id string to make a request to the youtube api
 
-  function randomNum (max, min) {
-    const num = Math.floor(Math.random() * (max - min) + min)
-    return num
-  }
+  // function randomNum (max, min) {
+  //   const num = Math.floor(Math.random() * (max - min) + min)
+  //   return num
+  // }
 
-  function search () {
-    const randomTag = randomNum(800, 1)
-    const tagNum = pad(randomTag, 4)
-    const tagName = ['DSC ', 'MOV ', 'IMG ']
-    const idxName = randomNum(2, 0)
-    const searchTag = tagName[idxName] + tagNum
+  // function search () {
+  //   const randomTag = randomNum(800, 1)
+  //   const tagNum = pad(randomTag, 4)
+  //   const tagName = ['DSC ', 'MOV ', 'IMG ']
+  //   const idxName = randomNum(2, 0)
+  //   const searchTag = tagName[idxName] + tagNum
 
-    getYoutubeResult(searchTag)
-      .then((resultData) => {
-        const idArray = resultData.map(item => item.id.videoId)
-        setVidId(idArray)
-        return idArray
-      })
-      .then((id) => {
-        return getStatistics(id)
-      })
-      .then((data) => {
-        const viewArray = data.items.map(ele => ele.statistics.viewCount)
-        const minViews = Math.min(...viewArray)
-        // setMinView(minViews)
-        const idx = viewArray.indexOf(minViews.toString())
-        setIndex(idx)
-        return minViews === 0 ? null : setToggle(!toggle)
-      })
-      .catch(err => console.error(err))
-  }
+  //   getYoutubeResult(searchTag)
+  //     .then((resultData) => {
+  //       const idArray = resultData.map(item => item.id.videoId)
+  //       setVidId(idArray)
+  //       return idArray
+  //     })
+  //     .then((id) => {
+  //       return getStatistics(id)
+  //     })
+  //     .then((data) => {
+  //       const viewArray = data.items.map(ele => ele.statistics.viewCount)
+  //       const minViews = Math.min(...viewArray)
+  //       // setMinView(minViews)
+  //       const idx = viewArray.indexOf(minViews.toString())
+  //       setIndex(idx)
+  //       return minViews === 0 ? null : setToggle(!toggle)
+  //     })
+  //     .catch(err => console.error(err))
+  // }
   /* ------------------------------------------------------------------*/
 
   const stringHeight = window.innerHeight.toString()
