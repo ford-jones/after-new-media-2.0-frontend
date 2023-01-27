@@ -26,12 +26,15 @@ function Modal ({ handleClose, text, load }) {
       y: '-100vh',
       opacity: 0
     }
-  }
+  }.then
 
-  function handleClick(e) {
+function handleClick(e) {
     e.preventDefault()
-    console.log('button hit!')
-    getMongoData()
+    setTimeout(() => {
+      const vidArr = getMongoData()
+      console.log('video array: ', vidArr)
+      return vidArr
+    }, 2000)
   }
 
 

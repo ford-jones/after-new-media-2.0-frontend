@@ -3,13 +3,17 @@ const router = express.Router()
 const db = require('../video')
 
 router.get('*', (req, res) => {
-  const operation = db.getVideo()
-  console.log('route data: ', operation)
+    const getVid = db.getVideo()
+console.log('operation: ', getVid)
     
-      if (!operation) {
-        res.sendStatus(500)
-      }
-    })
+  if (!getVid) {
+    res.sendStatus(500)
+  }
+  else {
+    return getVid
+  }}
+    
+)
 
 //})
 
