@@ -6,7 +6,7 @@ router.get('*', (req, res) => {
   
     const getVid = db.getVideo().then((results) => {
       console.log('route data: ', results)
-    return res.json(results)
+      return res.json(results)
     })
     
   if (!getVid) {
