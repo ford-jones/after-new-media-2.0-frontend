@@ -15,7 +15,6 @@ async function getVideo() {
         await collection.forEach((vid) => {
             return vidArr.push(vid)
         })
-        console.log('server array: ', vidArr)
 
     return vidArr
     

@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, {useState} from 'react'
 import { motion } from 'framer-motion'
 
 import Backdrop from './Backdrop'
@@ -7,6 +7,7 @@ import LoadAnim from './LoadAnim'
 import { getMongoData } from '../api'
 
 function Modal ({ handleClose, text, load }) {
+  const [videos, setVideos] = useState([])
   const dropIn = {
     initial: {
       y: '0',
@@ -28,19 +29,18 @@ function Modal ({ handleClose, text, load }) {
     }
   }.then
 
+  //  this is bugged, the button needs to be clicked twice to reach the console
 function handleClick(e) {
     e.preventDefault()
-    setTimeout(() => {
-      const vidArr = getMongoData()
-      console.log('video array: ', vidArr)
-      return vidArr
+    setTimeout(async() => {
+      setVideos(await getMongoData())
+      console.log('frontend data: ', videos)
     }, 2000)
   }
 
 
   return ( 
   <>
-  {/* <button className='button' type='submit' onClick={handleClick}>test</button>  */}
     <Backdrop onClick={handleClose}>
       {
         load
@@ -54,7 +54,7 @@ function handleClick(e) {
           >
             <motion.h1
               className='h1-title'
-              // this should call handleClose
+              // this is for testing purposes and should actually call handleClose
               onClick={handleClick}
             >
               {text}
