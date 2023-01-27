@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 
 import Backdrop from './Backdrop'
@@ -30,7 +30,7 @@ function Modal ({ handleClose, text, load }) {
   }.then
 
   //  this is bugged, the button needs to be clicked twice to reach the console
-function handleClick(e) {
+  function handleClick(e) {
     e.preventDefault()
     setTimeout(async() => {
       setVideos(await getMongoData())

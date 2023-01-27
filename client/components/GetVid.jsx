@@ -1,16 +1,23 @@
+//  ford
+
+/* ben */
+
 import React, { useEffect, useState } from 'react'
 import YouTube from 'react-youtube'
 import Modal from './Modal'
 import { AnimatePresence } from 'framer-motion'
 import { useToggle } from '../context/toggleContext'
 import { getMongoData } from '../api'
-// import VideoPlayer from './VideoPlayer'
+
+  /* import VideoPlayer from './VideoPlayer' */ 
 
 function GetVid () {
   const [vidId, setVidId] = useState([])
   const [toggle, setToggle] = useState(true)
   const [index, setIndex] = useState('')
-  // const [minView, setMinView] = useState('')
+  // const [videos, setVideos] = useState([]) 
+
+  /* const [minView, setMinView] = useState('') */
 
   const [player, setPlayer] = useState(null)
   const [modalOpen, setModalOpen] = useState(true)
@@ -23,17 +30,22 @@ function GetVid () {
   // }, [toggle])
 
   // function search() {
-  //   const vidArr = getMongoData(())
-  //   // const vidArr = new Array(...queryMongo)
-  //   console.log('video array: ', vidArr)
-  //   //       const idArray = resultData.map(item => item.id.videoId)
-  //   //       setVidId(idArray)
-  //   //       return idArray
-    
-  //   //       return getStatistics(id)
-  //   //       const viewArray = data.items.map(ele => ele.statistics.viewCount)
-  //   //       const idx = viewArray.indexOf(minViews.toString())
-  //   //       setIndex(idx)
+  //   setTimeout(async() => {
+  //     setVideos(await getMongoData())
+  //     console.log('frontend data: ', videos)
+  //   }, 2000)
+
+  //   if (videos.length != undefined && videos.length > 0) {
+  //     const video = videos[0].yt_id
+  //     console.log('video: ', video)
+
+  //     // query the api the "oldschool" (1.0) way with the video var as the search
+  //     // check if it still has 0 views
+  //     // if it does, pass it to the player with setVidId()
+  //     // otherwise delete it and repeat prev steps with videos[1].yt_id
+  //     // once thats done, find where vidId == oldschoolWay.id and send the result to db.delete
+  //     // this should all be able to run in the background as a video is playing
+  //   }
   // }
   
 
@@ -50,7 +62,7 @@ function GetVid () {
     height: stringHeight,
     width: stringWidth,
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
+      /* https://developers.google.com/youtube/player_parameters */
       autoplay: 1,
       controls: 0,
       mute: 1,
