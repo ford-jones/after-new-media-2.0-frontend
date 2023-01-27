@@ -3,8 +3,7 @@ import YouTube from 'react-youtube'
 import Modal from './Modal'
 import { AnimatePresence } from 'framer-motion'
 import { useToggle } from '../context/toggleContext'
-import { getStatistics, getYoutubeResult } from '../api'
-
+import { getMongoData } from '../api'
 // import VideoPlayer from './VideoPlayer'
 
 function GetVid () {
@@ -19,48 +18,24 @@ function GetVid () {
 
   const { playerToggle, setPlayerToggle } = useToggle()
 
-  useEffect(() => {
-    search()
-  }, [toggle])
+  // useEffect(() => {
+  //   search()
+  // }, [toggle])
 
-  function pad (num, size) {
-    let s = num + ''
-    while (s.length < size) s = '0' + s
-    return s
-  }
-
-  function randomNum (max, min) {
-    const num = Math.floor(Math.random() * (max - min) + min)
-    return num
-  }
-
-  function search () {
-    const randomTag = randomNum(800, 1)
-    const tagNum = pad(randomTag, 4)
-    const tagName = ['DSC ', 'MOV ', 'IMG ']
-    const idxName = randomNum(2, 0)
-    const searchTag = tagName[idxName] + tagNum
-    // console.log('searchTag: ', searchTag)
-
-    getYoutubeResult(searchTag)
-      .then((resultData) => {
-        const idArray = resultData.map(item => item.id.videoId)
-        setVidId(idArray)
-        return idArray
-      })
-      .then((id) => {
-        return getStatistics(id)
-      })
-      .then((data) => {
-        const viewArray = data.items.map(ele => ele.statistics.viewCount)
-        const minViews = Math.min(...viewArray)
-        // setMinView(minViews)
-        const idx = viewArray.indexOf(minViews.toString())
-        setIndex(idx)
-        return minViews === 0 ? null : setToggle(!toggle)
-      })
-      .catch(err => console.error(err))
-  }
+  // function search() {
+  //   const vidArr = getMongoData(())
+  //   // const vidArr = new Array(...queryMongo)
+  //   console.log('video array: ', vidArr)
+  //   //       const idArray = resultData.map(item => item.id.videoId)
+  //   //       setVidId(idArray)
+  //   //       return idArray
+    
+  //   //       return getStatistics(id)
+  //   //       const viewArray = data.items.map(ele => ele.statistics.viewCount)
+  //   //       const idx = viewArray.indexOf(minViews.toString())
+  //   //       setIndex(idx)
+  // }
+  
 
   const stringHeight = window.innerHeight.toString()
   const stringWidth = window.innerWidth.toString()

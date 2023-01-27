@@ -1,11 +1,13 @@
 
-import React from 'react'
+import React, {useState} from 'react'
 import { motion } from 'framer-motion'
 
 import Backdrop from './Backdrop'
 import LoadAnim from './LoadAnim'
+import { getMongoData } from '../api'
 
 function Modal ({ handleClose, text, load }) {
+  const [videos, setVideos] = useState([])
   const dropIn = {
     initial: {
       y: '0',
@@ -25,9 +27,20 @@ function Modal ({ handleClose, text, load }) {
       y: '-100vh',
       opacity: 0
     }
+  }.then
+
+  //  this is bugged, the button needs to be clicked twice to reach the console
+function handleClick(e) {
+    e.preventDefault()
+    setTimeout(async() => {
+      setVideos(await getMongoData())
+      console.log('frontend data: ', videos)
+    }, 2000)
   }
 
-  return (
+
+  return ( 
+  <>
     <Backdrop onClick={handleClose}>
       {
         load
@@ -41,7 +54,8 @@ function Modal ({ handleClose, text, load }) {
           >
             <motion.h1
               className='h1-title'
-              onClick={handleClose}
+              // this is for testing purposes and should actually call handleClose
+              onClick={handleClick}
             >
               {text}
             </motion.h1>
@@ -57,6 +71,7 @@ function Modal ({ handleClose, text, load }) {
       }
 
     </Backdrop>
+  </>
   )
 }
 

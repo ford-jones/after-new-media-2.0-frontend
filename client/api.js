@@ -1,19 +1,15 @@
 import request from 'superagent'
 
-export function getYoutubeResult (tag) {
+const rootUrl = '/api/v1'
+
+export function getMongoData() {
   return request
-    .get(`/api/v1/search/test/${tag}`)
-    .then(response => {
-      return response.body.items
+    .get(rootUrl + '/videos')
+    .then((response) => {
+      console.log('api data: ', response.body)
+      return response.body
     })
     .catch((err) => {
-      console.error('GET REQUEST yt Results: ', err.mesage, 'AT tag: ', tag)
-    })
-}
-export function getStatistics (id) {
-  return request
-    .get(`/api/v1/search/test/statistics/${id}`)
-    .then(response => {
-      return response.body
+      console.error('GET REQUEST FAILURE: ', err.message)
     })
 }
