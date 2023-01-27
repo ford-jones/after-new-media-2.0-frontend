@@ -5,11 +5,11 @@ const rootUrl = '/api/v1'
 export function getMongoData() {
   return request
     .get(rootUrl + '/videos')
-    .then((res) => {
-      console.log('api data: ', res)
-      return res
+    .then(() => {
+      console.log('api hit!')
+      return null
     })
     .catch((err) => {
-      console.error('GET REQUEST FAILURE: ', err.mesage)
+      console.error('GET REQUEST FAILURE: ', err.message)
     })
 }
