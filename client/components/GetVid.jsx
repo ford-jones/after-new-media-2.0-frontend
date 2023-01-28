@@ -7,7 +7,7 @@ import YouTube from 'react-youtube'
 import Modal from './Modal'
 import { AnimatePresence } from 'framer-motion'
 import { useToggle } from '../context/toggleContext'
-import { getMongoData } from '../api'
+import { getMongoData, deleteMongoData } from '../api'
 
   /* import VideoPlayer from './VideoPlayer' */ 
 
@@ -37,8 +37,8 @@ function GetVid () {
 
     if (videos.length != undefined && videos.length > 0) {
       const video = videos[0].yt_id
-      console.log('video: ', video)  
       setVidId(video)
+      deleteMongoData(video)
     }
     else {
       console.log('waiting for data...')
@@ -51,13 +51,10 @@ function GetVid () {
         // this should all be able to run in the background as a video is playing
     }
   
-  
-
   const stringHeight = window.innerHeight.toString()
   const stringWidth = window.innerWidth.toString()
   
   function close () {
-    //new
     search()
     setModalOpen(false)
     setPlayerToggle(true)
@@ -76,7 +73,6 @@ function GetVid () {
     }
   }
   function onReady (event) {
-    //new
     setPlayer(event.target)
     event.target.stopVideo()
     setTimeout(() => { setLoading(false) }, 3000)
