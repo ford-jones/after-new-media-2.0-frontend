@@ -40,6 +40,9 @@ function GetVid () {
       console.log('video: ', video)  
       setVidId(video)
     }
+    else {
+      console.log('waiting for data...')
+    }
     // query the api the "oldschool" (1.0) way with the video var as the search
     // if it does, pass it to the player with setVidId()
     // check if it still has 0 views
@@ -54,6 +57,8 @@ function GetVid () {
   const stringWidth = window.innerWidth.toString()
   
   function close () {
+    //new
+    search()
     setModalOpen(false)
     setPlayerToggle(true)
     player.playVideo()
@@ -71,6 +76,7 @@ function GetVid () {
     }
   }
   function onReady (event) {
+    //new
     setPlayer(event.target)
     event.target.stopVideo()
     setTimeout(() => { setLoading(false) }, 3000)
