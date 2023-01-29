@@ -28,7 +28,8 @@ function GetVid () {
     if (videos.length != undefined && videos.length > 0) {
       const video = videos[0].yt_id
 
-      const stats = getVidStats(video)
+      // Development
+      getVidStats(video)
       .then((data) => {
         data.items.map((x) => {
           console.log('viewCount: ', x.statistics.viewCount)
@@ -38,10 +39,22 @@ function GetVid () {
           : console.log('this video has more than 100 views')
         })
       })
-      
-      console.log('frontend stats: ', stats)
       setVidId(video)
       deleteMongoData(video)
+
+
+      // Production
+      // getVidStats(video)
+      // .then((data) => {
+      //   data.items.map((x) => {
+      //     console.log('viewCount: ', x.statistics.viewCount)
+      //     const vc = x.statistics.viewCount
+      //     vc === 0 
+      //     ? setVidId(video) && deleteMongoData(video)
+      //     : deleteMongoData(video) && search()
+      //   })
+      // })
+      
     }
     else {
       console.log('waiting for data...')
@@ -50,8 +63,6 @@ function GetVid () {
   //  check that the video still has 0 views before passing it to the player
   //  if it fails the check, delete the video and run the same check on the next video in the array
   //  repeat until one passes and then hand it to the player
-
-  //  while a video is playing, load the next video
 
   //  check that a video is region locked
   //  if it is, remove it from the database
