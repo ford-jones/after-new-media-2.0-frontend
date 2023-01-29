@@ -43,14 +43,8 @@ function GetVid () {
     else {
       console.log('waiting for data...')
     }
-    // query the api the "oldschool" (1.0) way with the video var as the search
-    // if it does, pass it to the player with setVidId()
-    // check if it still has 0 views
-        // otherwise delete it and repeat prev steps with videos[1].yt_id
-        // once thats done, find where vidId == oldschoolWay.id and send the result to db.delete
-        // this should all be able to run in the background as a video is playing
-    }
-  
+  }
+
   const stringHeight = window.innerHeight.toString()
   const stringWidth = window.innerWidth.toString()
   
