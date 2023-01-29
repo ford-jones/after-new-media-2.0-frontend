@@ -1,7 +1,3 @@
-//  ford
-
-/* ben */
-
 import React, { useEffect, useState } from 'react'
 import YouTube from 'react-youtube'
 import Modal from './Modal'
@@ -9,16 +5,11 @@ import { AnimatePresence } from 'framer-motion'
 import { useToggle } from '../context/toggleContext'
 import { getMongoData, deleteMongoData } from '../api'
 
-  /* import VideoPlayer from './VideoPlayer' */ 
-
 function GetVid () {
   const [vidId, setVidId] = useState([])
   const [toggle, setToggle] = useState(true)
   const [videos, setVideos] = useState([]) 
   
-  /* const [index, setIndex] = useState('') */
-  /* const [minView, setMinView] = useState('') */
-
   const [player, setPlayer] = useState(null)
   const [modalOpen, setModalOpen] = useState(true)
   const [loading, setLoading] = useState(true)
@@ -44,6 +35,16 @@ function GetVid () {
       console.log('waiting for data...')
     }
   }
+  //  check that the video still has 0 views before passing it to the player
+  //  if it fails the check, delete the video and run the same check on the next video in the array
+  //  repeat until one passes and then hand it to the player
+
+  //  while a video is playing, load the next video
+
+  //  check that a video is region locked
+  //  if it is, remove it from the database
+
+  //  Check the .env mode (production || development) and then pass the appropriate table data 
 
   const stringHeight = window.innerHeight.toString()
   const stringWidth = window.innerWidth.toString()
@@ -59,7 +60,6 @@ function GetVid () {
     height: stringHeight,
     width: stringWidth,
     playerVars: {
-      /* https://developers.google.com/youtube/player_parameters */
       autoplay: 1,
       controls: 0,
       mute: 1,
@@ -78,7 +78,6 @@ function GetVid () {
 
   return (
     <>
-      {/* <VideoPlayer id={vidId[index]} setToggle={setToggle} toggle={toggle} minView={minView}/> */}
       <AnimatePresence
         initial={true}
         exitBeforeEnter={true}
@@ -89,7 +88,6 @@ function GetVid () {
       </AnimatePresence>
 
       <div className='yt-player'>
-      {/* videoId={vidId[index]} */}
         <YouTube
           videoId={vidId}
           opts={opts}
