@@ -17,7 +17,6 @@ export function getVidStats(data) {
   return request
   .get(rootUrl + `/videos/stats/${data}`)
   .then((response) => {
-    console.log('api data: ', response.body)
     return response.body
   })
   .catch((err) => {

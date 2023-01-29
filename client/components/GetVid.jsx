@@ -27,9 +27,19 @@ function GetVid () {
 
     if (videos.length != undefined && videos.length > 0) {
       const video = videos[0].yt_id
+
       const stats = getVidStats(video)
-      console.log('frontend stats: ', stats)
+      .then((data) => {
+        data.items.map((x) => {
+          console.log('viewCount: ', x.statistics.viewCount)
+          const vc = x.statistics.viewCount
+          vc < 100 
+          ? console.log('this video has less than 100 views!') 
+          : console.log('this video has more than 100 views')
+        })
+      })
       
+      console.log('frontend stats: ', stats)
       setVidId(video)
       deleteMongoData(video)
     }
