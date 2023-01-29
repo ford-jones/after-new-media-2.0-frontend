@@ -11,6 +11,17 @@ export function getMongoData() {
     .catch((err) => {
       console.error('GET REQUEST FAILURE: ', err.message)
     })
+} 
+
+export function getVidStats(data) {
+  return request
+  .get(rootUrl + `/videos/stats/${data}`)
+  .then((response) => {
+    return response.body
+  })
+  .catch((err) => {
+    console.error('GET REQUEST FAILURE: ', err.message)
+  })
 }
 
 export function deleteMongoData(data) {
