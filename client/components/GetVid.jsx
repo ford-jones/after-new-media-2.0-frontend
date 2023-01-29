@@ -3,7 +3,7 @@ import YouTube from 'react-youtube'
 import Modal from './Modal'
 import { AnimatePresence } from 'framer-motion'
 import { useToggle } from '../context/toggleContext'
-import { getMongoData, deleteMongoData } from '../api'
+import { getMongoData, getVidStats, deleteMongoData } from '../api'
 
 function GetVid () {
   const [vidId, setVidId] = useState([])
@@ -23,11 +23,13 @@ function GetVid () {
   function search() {
     setTimeout(async() => {
       setVideos(await getMongoData())
-      console.log('frontend data: ', videos)
     }, 2000)
 
     if (videos.length != undefined && videos.length > 0) {
       const video = videos[0].yt_id
+      const stats = getVidStats(video)
+      console.log('frontend stats: ', stats)
+      
       setVidId(video)
       deleteMongoData(video)
     }
