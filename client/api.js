@@ -9,7 +9,7 @@ export function getMongoData() {
       return response.body
     })
     .catch((err) => {
-      console.error('GET REQUEST FAILURE: ', err.message)
+      console.error('GET MONGO FAILURE: ', err.message)
     })
 } 
 
@@ -20,7 +20,7 @@ export function getVidStats(data) {
     return response.body
   })
   .catch((err) => {
-    console.error('GET REQUEST FAILURE: ', err.message)
+    console.error('GET YT_API FAILURE: ', err.message)
   })
 }
 
