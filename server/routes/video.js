@@ -4,7 +4,7 @@ const { google } = require('googleapis')
 const db = require('../video')
 require('dotenv').config()
 
-const apiKey = process.env.API_KEY2
+const apiKey = process.env.API_KEY
 
 router.get('/', (req, res) => {
   const getVid = db.getVideo()
