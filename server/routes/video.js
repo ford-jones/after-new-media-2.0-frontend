@@ -1,9 +1,14 @@
 const express = require('express')
 const router = express.Router()
+const { google } = require('googleapis')
 const db = require('../video')
+require('dotenv').config()
 
-router.get('*', (req, res) => {
-  const getVid = db.getVideo().then((results) => {
+const apiKey = process.env.API_KEY2
+
+router.get('/', (req, res) => {
+  const getVid = db.getVideo()
+  .then((results) => {
     return res.json(results)
   })
   if (!getVid) {
@@ -12,12 +17,32 @@ router.get('*', (req, res) => {
   else {
     return getVid
   }}
-    
 )
 
-// router.delete('*', (req, res) => {
-//   const operation = db.deleteVideo()
-// })
+router.get('/stats/:id', (req, res) => {
+  const testId = req.params.id
+  google.youtube('v3').videos.list({
+    key: apiKey,
+    id: testId,
+    part: 'statistics'
+  }).then(response => {
+    res.json(response.data)
+    return null
+  }).catch((err) => {
+    res.status(500).json({ error: err.message })
+  })
+})
+
+router.delete('*', (req, res) => {
+  const deleteVid = db.deleteVideo(req.body)
+  .then(() => {
+    res.sendStatus(200)
+  })
+  .catch((err) => {
+    res.status(500).json({ error: err.message })
+  })
+  return deleteVid
+})
 
 module.exports = router
 
