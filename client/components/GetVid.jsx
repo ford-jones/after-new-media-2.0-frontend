@@ -28,48 +28,29 @@ function GetVid () {
       
       const video = videos[index].yt_id
 
-      // Development
       getVidStats(video)
       .then((data) => {
         data.items.map((x) => {
-          console.log('viewCount: ', x.statistics.viewCount)
-          const vc = x.statistics.viewCount
-          vc < 100 
-          ? console.log('this video has less than 100 views!') 
-          : console.log('this video has more than 100 views')
+            const vc = x.statistics.viewCount
+            vc === 0 
+            ? setVidId(video) + deleteMongoData(video)
+            : setVidId(videos[index + 1].yt_id) + deleteMongoData(video) + deleteMongoData(videos[index + 1].yt_id)
         })
       })
 
-      setVidId(video)
-      deleteMongoData(video)
-
       setTimeout(() => {
         const playerState = player.getPlayerState()
-        console.log('player state: ', playerState)
         playerState === -1 
         ? setVidId(videos[1].yt_id) + console.log('video cannot be played')
-        : console.log('playable')
+        : null
 
       }, 5000)
       
-      // Production
-      // getVidStats(video)
-      // .then((data) => {
-      //   data.items.map((x) => {
-        //     console.log('viewCount: ', x.statistics.viewCount)
-        //     const vc = x.statistics.viewCount
-        //     vc === 0 
-        //     ? setVidId(video) + deleteMongoData(video)
-        //     : deleteMongoData(video) + setVidId(videos[1].yt_id)
-        // })
-        
       }
       else {
         console.log('waiting for data...')
       }
-    }
-
-  //  Check the .env mode (production || development) and then pass the appropriate table data 
+    } 
 
   const stringHeight = window.innerHeight.toString()
   const stringWidth = window.innerWidth.toString()
