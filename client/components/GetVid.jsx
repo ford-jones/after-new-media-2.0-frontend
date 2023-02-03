@@ -34,12 +34,9 @@ function GetVid () {
             const vc = x.statistics.viewCount
             vc === 0 
             ? setVidId(video) + deleteMongoData(video)
-            : deleteMongoData(video) + setVidId(videos[1].yt_id)
+            : setVidId(videos[index + 1].yt_id) + deleteMongoData(video) + deleteMongoData(videos[index + 1].yt_id)
         })
       })
-
-      setVidId(video)
-      deleteMongoData(video)
 
       setTimeout(() => {
         const playerState = player.getPlayerState()
