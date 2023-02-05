@@ -43,6 +43,7 @@ describe('GET /api/v1/videos', () => {
     })
 })
 
+//  This needs to be rewritten, this route doesn't even call db.getVideo()
 describe('GET /api/v1/videos/stats/:id', () => {
     it('Responds with data from the Youtube API', () => {
         setTimeout(async () => {
@@ -76,6 +77,30 @@ describe('GET /api/v1/videos/stats/:id', () => {
                 expect(res.data).toBe(undefined)
                 return null
             })
+        }, 3000)
+    })
+})
+
+describe('DELETE /api/v1/videos', () => {
+    it('Deletes an item from the MongoDB database', () => {
+        setTimeout(() => {
+            db.deleteVideo(mockVideo.yt_id).mockImplementation(() => {
+                expect(mockVideo.yt_id).toBe(12345)
+            })
+            return request(server)
+            .del('/api/v1/videos/*')
+            .expect(200)
+        }, 3000)
+    })
+
+    it('Sends a status code of 500 upon encountering an error', () => {
+        setTimeout(() => {
+            db.deleteVideo(mockVideo.yt_id).mockImplementation(() => {
+                expect(mockVideo.yt_id).toBe(!12345)
+            })
+            return request(server)
+            .del('/api/v1/videos/*')
+            .expect(500)
         }, 3000)
     })
 })
