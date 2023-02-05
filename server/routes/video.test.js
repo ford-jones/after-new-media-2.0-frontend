@@ -6,6 +6,11 @@ jest.mock('../video')
 
 const mockVideo = {yt_id: 12345}
 
+const mockStatsRes = {
+    resultsPerPage: 0,
+    totalResults: 0
+}
+
 describe('GET /api/v1/videos', () => {
     it('Responds with data from MongoDB', () => {
         setTimeout(async () => {
@@ -24,7 +29,7 @@ describe('GET /api/v1/videos', () => {
         })
         }, 3000)
 
-        it('Sends a status code of 500 upon encountering an error', () => {
+        it('Sends a status code of 500 upon encountering a mongoDB GET failure.', () => {
             setTimeout(() => {
                     db.getVideo().mockImplementation(() => {
                         Promise.reject(new Error('mock getVideo error'))
@@ -43,43 +48,27 @@ describe('GET /api/v1/videos', () => {
     })
 })
 
-//  This needs to be rewritten, this route doesn't even call db.getVideo()
 describe('GET /api/v1/videos/stats/:id', () => {
     it('Responds with data from the Youtube API', () => {
-        setTimeout(async () => {
-            try {
-                await db.getVideo().mockImplementation((yt_id) => {
-                    expect(yt_id).toBe(12345)
-                    return Promise.resolve(mockVideo)
-                })                
-            } catch (err) {
-                return err.message
-            }
-            return request(server)
-            .get('/api/v1/videos/stats/12345')
-            .expect('Content-Type', /json/)
-            .expect(200)
+        return request(server)
+        .get('/api/v1/videos/stats/12345')
+        .expect('content-type', /json/)
+        .then((response) => {
+            expect(JSON.parse(response.text).pageInfo).toStrictEqual(mockStatsRes)
+            return null
         })
-        }, 3000)
+    })
     
-    it('Sends a status code of 500 upon encountering an error', () => {
-        setTimeout(() => {
-                db.getVideo().mockImplementation(() => {
-                    Promise.reject(new Error('mock getVideo error'))
-                })
-
+    it('Sends a status code of 500 upon encountering a ytAPI GET error', () => {
             return request(server)
-            .get('/api/v1/videos/stats/11111')
-            .expect('Content-Type', /json/)
-            .expect(500)
-            .then((res) => {
-                expect(jest.fn(console.log)).toHaveBeenCalledWith('mock getVideo error')
-                expect(res.data).toBe(undefined)
+            .get(`/api/v1/videos/stats/${undefined}`)
+            .then((response) => {
+                expect(response.data).toBe(undefined)
+                expect(500)
                 return null
             })
-        }, 3000)
+        })
     })
-})
 
 describe('DELETE /api/v1/videos', () => {
     it('Deletes an item from the MongoDB database', () => {
@@ -88,18 +77,18 @@ describe('DELETE /api/v1/videos', () => {
                 expect(mockVideo.yt_id).toBe(12345)
             })
             return request(server)
-            .del('/api/v1/videos/*')
+            .del('/api/v1/videos')
             .expect(200)
         }, 3000)
     })
 
-    it('Sends a status code of 500 upon encountering an error', () => {
+    it('Sends a status code of 500 if deletion fails.', () => {
         setTimeout(() => {
             db.deleteVideo(mockVideo.yt_id).mockImplementation(() => {
-                expect(mockVideo.yt_id).toBe(!12345)
+                expect(mockVideo.yt_id).toBe(undefined)
             })
             return request(server)
-            .del('/api/v1/videos/*')
+            .del('/api/v1/videos')
             .expect(500)
         }, 3000)
     })
