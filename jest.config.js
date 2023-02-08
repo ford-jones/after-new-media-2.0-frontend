@@ -12,8 +12,15 @@ module.exports = {
             displayName: 'client',
             testEnvironment: 'jsdom',
             testMatch: [
-                "<rootDir>/client/**/*.test.js"
+                "<rootDir>/client/components/*.test.js",
               ],
+        },
+        {
+            displayName: 'API',
+            testEnvironment: 'node',
+            testMatch: [
+                "<rootDir>/client/api.test.js"
+            ]
         }
     ]
 };
