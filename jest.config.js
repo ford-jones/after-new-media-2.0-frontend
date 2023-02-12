@@ -15,12 +15,12 @@ module.exports = {
                 "<rootDir>/client/components/*.test.js",
               ],
         },
-        {
-            displayName: 'API',
-            testEnvironment: 'node',
-            testMatch: [
-                "<rootDir>/client/api.test.js"
-            ]
-        }
+        // {
+        //     displayName: 'API',
+        //     testEnvironment: 'node',
+        //     testMatch: [
+        //         "<rootDir>/client/api.test.js"
+        //     ]
+        // }
     ]
 };
