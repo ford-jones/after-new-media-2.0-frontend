@@ -47,6 +47,7 @@ function LoadAnim () {
 
   return (
     <motion.div
+      data-testid='loader'
       style={loadContainer}
       variants={loadingContainerVariants}
       initial='start'

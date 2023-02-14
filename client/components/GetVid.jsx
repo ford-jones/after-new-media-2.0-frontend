@@ -33,7 +33,7 @@ function GetVid () {
         data.items.map((x) => {
             const vc = x.statistics.viewCount
             vc === 0 
-            ? setVidId(video) + deleteMongoData(video)
+            ? setVidId((video)) + deleteMongoData(video)
             : setVidId(videos[index + 1].yt_id) + deleteMongoData(video) + deleteMongoData(videos[index + 1].yt_id)
         })
       })
@@ -96,7 +96,7 @@ function GetVid () {
 
       <div className='yt-player'>
         <YouTube
-          videoId={vidId}
+          videoId={String(vidId)}
           opts={opts}
           onEnd={() => { setToggle(() => !toggle) }}
           onPlay={onPlay}

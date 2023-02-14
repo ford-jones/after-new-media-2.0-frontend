@@ -20,10 +20,10 @@ router.get('/', (req, res) => {
 )
 
 router.get('/stats/:id', (req, res) => {
-  const testId = req.params.id
+  const paramsId = req.params.id
   google.youtube('v3').videos.list({
     key: apiKey,
-    id: testId,
+    id: paramsId,
     part: 'statistics'
   }).then(response => {
     res.json(response.data)
