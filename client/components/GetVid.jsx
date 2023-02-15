@@ -32,7 +32,7 @@ function GetVid () {
       .then((data) => {
         data.items.map((x) => {
             const vc = x.statistics.viewCount
-            vc === 0 
+            vc < 100 
             ? setVidId((video)) + deleteMongoData(video)
             : setVidId(videos[index + 1].yt_id) + deleteMongoData(video) + deleteMongoData(videos[index + 1].yt_id)
         })
