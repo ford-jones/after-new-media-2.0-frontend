@@ -1,5 +1,5 @@
 # zero-views-youtube-crawler
-To make full use of this user-interface, take a look at its python precursor here*: https://github.com/ford-jones/zero-views-youtube-crawler
+To make full use of this user-interface, take a look at its python precursor here*: https://github.com/ford-jones/after-new-media-2.0
 
 # get started:
 1. Clone the repository:
